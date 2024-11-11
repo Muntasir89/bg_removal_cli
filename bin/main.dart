@@ -17,6 +17,9 @@ void main(List<String> args) {
     return;
   }
 
+  int processedPixel = 0;
+  int unProcessedPixel = 0;
+
   // Process the image to make white pixels transparent
   for (int y = 0; y < image.height; y++) {
     for (int x = 0; x < image.width; x++) {
@@ -26,18 +29,19 @@ void main(List<String> args) {
       final b = pixel.b;
 
       // Define the threshold for "white" (can be adjusted for sensitivity)
-      if (r > 240 && g > 240 && b > 240) {
-        // Set the pixel to transparent (RGBA: 0x00FFFFFF)
-        // for making each pixel transparent with existing pixel
+      if (r > 200 && g > 200 && b > 200) {
         image.setPixelRgba(x, y, r, g, b, 0);
-        // for making each pixel transparent with black pixel
-        // image.setPixelRgba(x, y, 0, 0, 0, 0);
+        processedPixel = processedPixel + 1;
+      } else {
+        unProcessedPixel = unProcessedPixel + 1;
       }
     }
   }
 
   // Save the modified image as a PNG (to preserve transparency)
-  final outputPath = 'output_image.png';
+  final outputPath = 'output_image1.png';
   File(outputPath).writeAsBytesSync(encodePng(image));
   print('Processed image saved to $outputPath');
+  print(processedPixel);
+  print(unProcessedPixel);
 }

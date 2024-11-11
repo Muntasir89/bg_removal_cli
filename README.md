@@ -1,2 +1,5 @@
-A sample command-line application with an entrypoint in `bin/`, library code
-in `lib/`, and example unit test in `test/`.
+to Run the app from terminal
+
+```
+dart  run bin/main.dart ./input_image.png
+```
